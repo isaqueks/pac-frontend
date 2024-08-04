@@ -4,6 +4,10 @@
         <mat-card-title>Login</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+        <!-- progress loader -->
+        <div *ngIf="loading" class="progress-loader">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-page',
@@ -9,6 +10,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
+  loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,16 +31,23 @@ export class LoginPageComponent implements OnInit {
 
     const { email, password } = this.loginForm.value;
 
+    this.loading = true;
+
     this.auth.signIn(email, password).subscribe({
         next: () => {
             console.log('User is logged in');
             this.auth.getLoggedUser().subscribe({
                 next: console.log,
-                error: console.error
+                error: console.error,
+                complete: () => this.loading = false
             });
         },
         error: (error) => {
-            console.error(error);
+            this.loading = false;
+            Swal.fire({
+                title: 'Credenciais incorretas',
+                icon: 'error'
+            })
         }
     })
   }

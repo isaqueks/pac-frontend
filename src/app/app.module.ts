@@ -6,16 +6,18 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpHandlerInterceptor } from './http-handler.interceptor';
+import { SidenavModule } from './sidenav/sidenav.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    SidenavModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpHandlerInterceptor, multi: true }

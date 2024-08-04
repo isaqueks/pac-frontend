@@ -1,0 +1,85 @@
+<div class="client-form-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ isEditMode ? 'Edit Client' : 'Create Client' }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Company Name</mat-label>
+              <input matInput formControlName="companyName" required>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Business Name</mat-label>
+              <input matInput formControlName="businessName">
+            </mat-form-field>
+          </div>
+  
+          <div class="form-row">
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>CNPJ</mat-label>
+              <input matInput formControlName="cnpj" required>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Address Zip Code</mat-label>
+              <input matInput formControlName="addressZipCode">
+            </mat-form-field>
+          </div>
+  
+          <div class="form-row">
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Address Street</mat-label>
+              <input matInput formControlName="addressStreet">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Address Number</mat-label>
+              <input matInput type="number" formControlName="addressNumber">
+            </mat-form-field>
+          </div>
+  
+          <div class="form-row">
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Address Complement</mat-label>
+              <input matInput formControlName="addressComplement">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Address District</mat-label>
+              <input matInput formControlName="addressDistrict">
+            </mat-form-field>
+          </div>
+  
+          <div class="form-row">
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Address City</mat-label>
+              <input matInput formControlName="addressCity">
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Address State</mat-label>
+              <input matInput formControlName="addressState">
+            </mat-form-field>
+          </div>
+  
+          <div class="form-row">
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" required>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="form-field">
+              <mat-label>Password</mat-label>
+              <input matInput formControlName="password" type="password" required>
+            </mat-form-field>
+          </div>
+  
+          <button mat-raised-button color="primary" type="submit" [disabled]="!clientForm.valid">{{ isEditMode ? 'Update' : 'Create' }}</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
