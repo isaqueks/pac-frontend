@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer class="sidenav" mode="side" opened>
+    <mat-sidenav #drawer class="sidenav" mode="side" [opened]="!!user">
       <mat-toolbar>Menu</mat-toolbar>
       <mat-nav-list *ngIf="user">
         <ng-container *ngFor="let item of menuItems">
@@ -8,12 +8,16 @@
                 <span>{{ item.label }}</span>
             </mat-list-item>
         </ng-container>
+        <mat-list-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Log-out</span>
+        </mat-list-item>
       </mat-nav-list>
       <mat-spinner *ngIf="!user"></mat-spinner>
     </mat-sidenav>
     <mat-sidenav-content>
       <mat-toolbar color="primary">
-        <button mat-icon-button (click)="drawer.toggle()">
+        <button mat-icon-button (click)="drawer.toggle()" *ngIf="user">
           <mat-icon>menu</mat-icon>
         </button>
         <span>PAC</span>
@@ -23,4 +27,5 @@
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
+
   

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ClientService } from 'src/app/shared/client.service';
 import { IClient } from 'src/app/shared/entities/client.entity';
 
@@ -12,7 +13,10 @@ export class ListComponent {
     displayedColumns: string[] = ['companyName', 'businessName', 'cnpj', 'email', 'actions'];
     dataSource: MatTableDataSource<IClient> = new MatTableDataSource<IClient>();
   
-    constructor(private clientService: ClientService) {}
+    constructor(
+        private clientService: ClientService,
+        private router: Router
+    ) {}
   
     ngOnInit(): void {
       this.loadClients();
@@ -30,6 +34,7 @@ export class ListComponent {
   
     editClient(client: IClient): void {
       // Logic to edit the client
+        this.router.navigate(['/client/edit', client.id]);
     }
   
     deleteClient(clientId: string): void {

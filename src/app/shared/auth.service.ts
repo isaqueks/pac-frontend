@@ -19,8 +19,18 @@ export class AuthService {
         return this.http.post<{ token: string }>(`/auth/signin`, { email, password })
         .pipe(map(res => {
             localStorage.setItem('token', res.token);
+            window.location.reload();
             return res.token;
         }))
+    }
+
+    public signOut(): Observable<void> {
+        localStorage.removeItem('token');
+        window.location.reload();
+        return new Observable(subscriber => {
+            subscriber.next();
+            subscriber.complete();
+        });
     }
 
     public getLoggedUser(): Observable<IUser> {

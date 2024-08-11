@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import IEntityService from './entity-base.service';
 import { ITechnician } from './entities/techician.entity';
-import { ITechnicalManager } from './entities/technician-maneger.entity';
+import { ITechnicalManager } from './entities/technical-maneger.entity';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 

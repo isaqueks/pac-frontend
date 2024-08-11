@@ -43,7 +43,11 @@ export class EditComponent {
           this.isEditMode = true;
           this.clientId = id;
           this.clientService.getById(id).subscribe(client => {
-            this.clientForm.patchValue(client);
+            this.clientForm.patchValue({
+                ...client,
+                email: client.user?.email
+            });
+            this.clientForm.get('password')?.disable();
           });
         }
       });

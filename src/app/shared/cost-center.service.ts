@@ -17,6 +17,10 @@ export class CostCenterService implements IEntityService<ICostCenter> {
         return this.http.get<ICostCenter[]>('/cost-centers');
     }
 
+    getByClientId(clientId: string): Observable<ICostCenter[]> {
+        return this.http.get<ICostCenter[]>(`/cost-centers?clientId=${clientId}`);
+      }
+
     getById(id: string): Observable<ICostCenter> {
         return this.http.get<ICostCenter>(`/cost-centers/${id}`);
     }

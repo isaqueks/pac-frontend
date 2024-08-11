@@ -37,8 +37,16 @@ export class LoginPageComponent implements OnInit {
         next: () => {
             console.log('User is logged in');
             this.auth.getLoggedUser().subscribe({
-                next: console.log,
-                error: console.error,
+                next: user => {
+                    
+                },
+                error: err => {
+                    Swal.fire({
+                        title: 'Não foi possível fazer log-in',
+                        text: String(err),
+                        icon: 'error'
+                    })
+                },
                 complete: () => this.loading = false
             });
         },

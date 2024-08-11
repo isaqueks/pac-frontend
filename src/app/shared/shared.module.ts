@@ -15,11 +15,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatOptionModule } from '@angular/material/core';
+import { ClientSelectComponent } from './client-select/client-select.component';
+import { CostCenterSelectComponent } from './cost-center-select/cost-center-select.component';
 
 @NgModule({
   declarations: [
 
+  
+    ClientSelectComponent,
+    CostCenterSelectComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -34,6 +40,8 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatIconModule,
     MatTableModule,
+    MatSnackBarModule,
+    MatOptionModule,
     RouterModule,
     CommonModule
   ],
@@ -52,7 +60,11 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatIconModule,
     MatTableModule,
+    MatSnackBarModule,
+    MatOptionModule,
     RouterModule,
+    ClientSelectComponent,
+    CostCenterSelectComponent,
     CommonModule
   ]
 })

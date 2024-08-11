@@ -1,21 +1,21 @@
 <div class="client-list-container">
     <mat-toolbar>
-      <span>Clients</span>
+      <span>Clientes</span>
       <span class="spacer"></span>
-      <button mat-raised-button color="primary" [routerLink]="'edit'">Add Client</button>
+      <button mat-raised-button color="primary" [routerLink]="'edit'">Adicionar Cliente</button>
     </mat-toolbar>
   
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
       <!-- Company Name Column -->
       <ng-container matColumnDef="companyName">
-        <mat-header-cell *matHeaderCellDef> Company Name </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Nome Fantasia </mat-header-cell>
         <mat-cell *matCellDef="let client"> {{client.companyName}} </mat-cell>
       </ng-container>
   
       <!-- Business Name Column -->
       <ng-container matColumnDef="businessName">
-        <mat-header-cell *matHeaderCellDef> Business Name </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Razão Social </mat-header-cell>
         <mat-cell *matCellDef="let client"> {{client.businessName}} </mat-cell>
       </ng-container>
   
@@ -28,12 +28,12 @@
       <!-- User Column -->
       <ng-container matColumnDef="email">
         <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
-        <mat-cell *matCellDef="let client"> {{client.user.email}} </mat-cell>
+        <mat-cell *matCellDef="let client"> {{client.user?.email}} </mat-cell>
       </ng-container>
   
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
         <mat-cell *matCellDef="let client">
           <button mat-icon-button color="primary" (click)="editClient(client)">
             <mat-icon>edit</mat-icon>

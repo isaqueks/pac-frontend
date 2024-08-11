@@ -17,6 +17,10 @@ export class TechnicianService implements IEntityService<ITechnician> {
         return this.http.get<ITechnician[]>('/technicians');
     }
 
+    getAllByCostCenter(ccID: string): Observable<ITechnician[]> {
+        return this.http.get<ITechnician[]>(`/technicians?costCenterId=${ccID}`);
+    }
+
     getById(id: string): Observable<ITechnician> {
         return this.http.get<ITechnician>(`/technicians/${id}`);
     }

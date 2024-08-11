@@ -1,0 +1,7 @@
+<mat-spinner *ngIf="loading" [mode]="'indeterminate'"></mat-spinner>
+<mat-form-field class="form-field" appearance="fill" *ngIf="!loading && clients.length">
+    <mat-label>{{label}}</mat-label>
+    <select matNativeControl (change)="selectClient($event)" [value]="value?.id">
+        <option *ngFor="let client of clients" [value]="client.id">{{ client.companyName }}</option>
+    </select>
+</mat-form-field>

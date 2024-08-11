@@ -1,0 +1,64 @@
+<div class="cost-center-list-container">
+    <mat-toolbar>
+      <!-- <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Selecionar Cliente</mat-label>
+        <select matNativeControl [value]="selectedClientId" (change)="onClientChange($event)">
+        <option  [value]="undefined">-- Selecione --</option>
+          <option *ngFor="let client of clients" [value]="client.id">{{ client.companyName }}</option>
+        </select>
+      </mat-form-field> -->
+      <client-select (valueChange)="onClientChange($event)"></client-select>
+      <span class="spacer"></span>
+      <button mat-raised-button color="primary" [routerLink]="'edit'">Adicionar Centro de Custo</button>
+    </mat-toolbar>
+  
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+      <!-- Nome da Empresa Column -->
+      <ng-container matColumnDef="companyName">
+        <mat-header-cell *matHeaderCellDef> Nome da Empresa </mat-header-cell>
+        <mat-cell *matCellDef="let costCenter"> {{costCenter.companyName}} </mat-cell>
+      </ng-container>
+  
+      <!-- Nome Fantasia Column -->
+      <ng-container matColumnDef="businessName">
+        <mat-header-cell *matHeaderCellDef> Nome Fantasia </mat-header-cell>
+        <mat-cell *matCellDef="let costCenter"> {{costCenter.businessName}} </mat-cell>
+      </ng-container>
+  
+      <!-- CNPJ Column -->
+      <ng-container matColumnDef="cnpj">
+        <mat-header-cell *matHeaderCellDef> CNPJ </mat-header-cell>
+        <mat-cell *matCellDef="let costCenter"> {{costCenter.cnpj}} </mat-cell>
+      </ng-container>
+  
+      <!-- Usuário Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
+        <mat-cell *matCellDef="let costCenter"> {{costCenter.user?.email}} </mat-cell>
+      </ng-container>
+  
+      <!-- Cliente Column -->
+      <ng-container matColumnDef="client">
+        <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
+        <mat-cell *matCellDef="let costCenter"> {{costCenter.client?.companyName}} </mat-cell>
+      </ng-container>
+  
+      <!-- Ações Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let costCenter">
+          <button mat-icon-button color="primary" (click)="editarCentroDeCusto(costCenter)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deletarCentroDeCusto(costCenter.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  
