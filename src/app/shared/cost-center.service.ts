@@ -30,7 +30,7 @@ export class CostCenterService implements IEntityService<ICostCenter> {
     }
 
     update(entity: ICostCenter): Observable<ICostCenter> {
-        return this.http.patch<ICostCenter>(`/cost-centers/${entity.id}`, entity);
+        return this.http.put<ICostCenter>(`/cost-centers/${entity.id}`, entity);
     }
 
     delete(id: string): Observable<void> {

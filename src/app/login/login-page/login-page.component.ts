@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import Swal from 'sweetalert2';
 
@@ -14,7 +15,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
 ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -38,7 +40,7 @@ export class LoginPageComponent implements OnInit {
             console.log('User is logged in');
             this.auth.getLoggedUser().subscribe({
                 next: user => {
-                    
+                    window.location.href = '/';
                 },
                 error: err => {
                     Swal.fire({

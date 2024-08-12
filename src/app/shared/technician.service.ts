@@ -30,7 +30,7 @@ export class TechnicianService implements IEntityService<ITechnician> {
     }
 
     update(entity: ITechnician): Observable<ITechnician> {
-        return this.http.patch<ITechnician>(`/technicians/${entity.id}`, entity);
+        return this.http.put<ITechnician>(`/technicians/${entity.id}`, entity);
     }
 
     delete(id: string): Observable<void> {

@@ -15,22 +15,26 @@ export class TechnicianManagerService implements IEntityService<ITechnicalManage
   ) { }
 
     getAll(): Observable<ITechnicalManager[]> {
-        return this.http.get<ITechnicalManager[]>('/technician-managers');
+        return this.http.get<ITechnicalManager[]>('/technical-managers');
     }
 
     getById(id: string): Observable<ITechnicalManager> {
-        return this.http.get<ITechnicalManager>(`/technician-managers/${id}`);
+        return this.http.get<ITechnicalManager>(`/technical-managers/${id}`);
+    }
+
+    getAllByCostCenter(ccID: string): Observable<ITechnicalManager[]> {
+        return this.http.get<ITechnicalManager[]>(`/technical-managers?costCenterId=${ccID}`);
     }
 
     create(entity: ITechnicalManager): Observable<ITechnicalManager> {
-        return this.http.post<ITechnicalManager>('/technician-managers', entity);
+        return this.http.post<ITechnicalManager>('/technical-managers', entity);
     }
 
     update(entity: ITechnicalManager): Observable<ITechnicalManager> {
-        return this.http.patch<ITechnicalManager>(`/technician-managers/${entity.id}`, entity);
+        return this.http.put<ITechnicalManager>(`/technical-managers/${entity.id}`, entity);
     }
 
     delete(id: string): Observable<void> {
-        return this.http.delete<void>(`/technician-managers/${id}`);
+        return this.http.delete<void>(`/technical-managers/${id}`);
     }
 }

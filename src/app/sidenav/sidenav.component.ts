@@ -37,7 +37,7 @@ export class SidenavComponent {
 
     logout() {
         this.auth.signOut().subscribe(() => {
-            this.router.navigate(['/login']);
+            window.location.href = '/login';
         });
     }
 
@@ -45,7 +45,7 @@ export class SidenavComponent {
         { label: 'Centros de Custo', icon: 'home', path: 'cost-center', perms: [UserRoleEnum.ADMIN, UserRoleEnum.CLIENT] },
         { label: 'Clientes', icon: 'settings', path: 'client', perms: [UserRoleEnum.ADMIN] },
         { label: 'Técnicos', icon: 'person', path: 'technician', perms: [UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER] },
-        { label: 'Responsáveis Técnicos', icon: 'help', perms: [UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER] },
+        { label: 'Responsáveis Técnicos', icon: 'help', path: 'technical-manager', perms: [UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER] },
         { label: 'Formulários', icon: 'help', perms: [
             UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER, UserRoleEnum.TECHNICIAN, UserRoleEnum.TECHNICAL_MANAGER
         ] },
