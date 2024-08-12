@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -42,6 +42,7 @@ import { CostCenterSelectComponent } from './cost-center-select/cost-center-sele
     MatTableModule,
     MatSnackBarModule,
     MatOptionModule,
+    FormsModule,
     RouterModule,
     CommonModule
   ],
@@ -63,6 +64,7 @@ import { CostCenterSelectComponent } from './cost-center-select/cost-center-sele
     MatSnackBarModule,
     MatOptionModule,
     RouterModule,
+    FormsModule,
     ClientSelectComponent,
     CostCenterSelectComponent,
     CommonModule

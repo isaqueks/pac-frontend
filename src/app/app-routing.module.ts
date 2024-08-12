@@ -25,6 +25,10 @@ const routes: Routes = [
     {
         path: 'technical-manager',
         loadChildren: () => import('./technical-manager/technical-manager.module').then(m => m.TechnicalManagerModule)
+    },
+    {
+        path: 'form',
+        loadChildren: () => import('./form/form.module').then(m => m.FormModule)
     }
 ];
 

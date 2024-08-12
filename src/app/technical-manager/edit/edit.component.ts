@@ -64,14 +64,14 @@ export class EditComponent {
           this.snackBar.open('Gerente Técnico atualizado com sucesso', 'Fechar', {
             duration: 3000
           });
-          this.router.navigate(['/technical-managers']);
+          this.router.navigate(['/technical-manager']);
         });
       } else {
         this.technicalManagerService.create(manager).subscribe(() => {
           this.snackBar.open('Gerente Técnico criado com sucesso', 'Fechar', {
             duration: 3000
           });
-          this.router.navigate(['/technical-managers']);
+          this.router.navigate(['/technical-manager']);
         });
       }
     }

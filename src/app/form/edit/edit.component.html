@@ -1,0 +1,59 @@
+<div class="form-edit-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ isEditMode ? 'Editar Formulário' : 'Criar Formulário' }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="form-field">
+          <mat-form-field appearance="fill">
+            <mat-label>Título do Formulário</mat-label>
+            <input matInput [(ngModel)]="form.title" name="title" required>
+          </mat-form-field>
+        </div>
+  
+        <cost-center-select style="width: 100%;" [(value)]="selectedCostCenter"></cost-center-select>
+  
+        <mat-divider></mat-divider>
+  
+        <div class="form-components-section">
+          <h3>Componentes do Formulário</h3>
+          <button mat-raised-button color="primary" (click)="addFormComponent()">Adicionar Componente</button>
+  
+          <div *ngFor="let component of formComponents; let i = index" class="form-component">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>Componente {{i + 1}}</mat-card-title>
+                <button mat-icon-button color="warn" (click)="removeFormComponent(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-card-header>
+              <mat-card-content>
+                <mat-form-field appearance="fill">
+                  <mat-label>Título do Componente</mat-label>
+                  <input matInput [(ngModel)]="component.title" name="compTitle" required>
+                </mat-form-field>
+  
+                <mat-form-field appearance="fill">
+                  <mat-label>Subtítulo do Componente</mat-label>
+                  <input matInput [(ngModel)]="component.subtitle" name="compSubtitle">
+                </mat-form-field>
+  
+                <mat-form-field appearance="fill">
+                  <mat-label>Tipo do Componente</mat-label>
+                  <select matNativeControl [(ngModel)]="component.type" name="compType">
+                    <option *ngFor="let type of formComponentTypes" [value]="type">{{type}}</option>
+                  </select>
+                </mat-form-field>
+  
+                <mat-checkbox [(ngModel)]="component.required" name="compRequired">Obrigatório</mat-checkbox>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="saveForm()">Salvar Formulário</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  

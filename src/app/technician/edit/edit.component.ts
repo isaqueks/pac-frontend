@@ -69,14 +69,14 @@ export class EditComponent {
         this.snackBar.open('Técnico atualizado com sucesso', 'Fechar', {
           duration: 3000
         });
-        this.router.navigate(['/technicians']);
+        this.router.navigate(['/technician']);
       });
     } else {
       this.technicianService.create(technician).subscribe(() => {
         this.snackBar.open('Técnico criado com sucesso', 'Fechar', {
           duration: 3000
         });
-        this.router.navigate(['/technicians']);
+        this.router.navigate(['/technician']);
       });
     }
   }

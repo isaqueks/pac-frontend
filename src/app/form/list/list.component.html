@@ -1,0 +1,38 @@
+<div class="form-list-container">
+    <mat-toolbar>
+      <span>Formulários</span>
+      <cost-center-select (valueChange)="onCostCenterSelect($event)"></cost-center-select>
+      <span class="spacer"></span>
+      <button mat-raised-button color="primary" [routerLink]="'edit'">Adicionar Formulário</button>
+    </mat-toolbar>
+  
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Título Column -->
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Título </mat-header-cell>
+        <mat-cell *matCellDef="let form"> {{form.title}} </mat-cell>
+      </ng-container>
+  
+      <!-- Centro de Custo Column -->
+      <ng-container matColumnDef="costCenter">
+        <mat-header-cell *matHeaderCellDef> Centro de Custo </mat-header-cell>
+        <mat-cell *matCellDef="let form"> {{form.costCenter?.companyName}} </mat-cell>
+      </ng-container>
+  
+      <!-- Ações Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let form">
+          <button mat-icon-button color="primary" (click)="editarFormulario(form)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deletarFormulario(form.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

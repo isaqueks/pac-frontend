@@ -59,11 +59,11 @@ export class EditComponent {
         if (this.isEditMode) {
           client.id = this.clientId!;
           this.clientService.update(client).subscribe(() => {
-            this.router.navigate(['/clients']);
+            this.router.navigate(['/client']);
           });
         } else {
           this.clientService.create(client).subscribe(() => {
-            this.router.navigate(['/clients']);
+            this.router.navigate(['/client']);
           });
         }
       }
