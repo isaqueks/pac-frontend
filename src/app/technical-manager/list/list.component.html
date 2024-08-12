@@ -1,0 +1,55 @@
+<div class="technical-manager-list-container">
+    <mat-toolbar>
+      <span>Gerentes Técnicos</span>
+      <cost-center-select (valueChange)="onCostCenterSelect($event)"></cost-center-select>
+      <span class="spacer"></span>
+      <button mat-raised-button color="primary" [routerLink]="'edit'">Adicionar Gerente Técnico</button>
+    </mat-toolbar>
+  
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Nome Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let manager"> {{manager.name}} </mat-cell>
+      </ng-container>
+  
+      <!-- Telefone Column -->
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
+        <mat-cell *matCellDef="let manager"> {{manager.phone}} </mat-cell>
+      </ng-container>
+  
+      <!-- Documento Column -->
+      <ng-container matColumnDef="document">
+        <mat-header-cell *matHeaderCellDef> Documento </mat-header-cell>
+        <mat-cell *matCellDef="let manager"> {{manager.document}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
+        <mat-cell *matCellDef="let manager"> {{manager.user?.email}} </mat-cell>
+      </ng-container>
+  
+      <!-- Centro de Custo Column -->
+      <ng-container matColumnDef="costCenter">
+        <mat-header-cell *matHeaderCellDef> Centro de Custo </mat-header-cell>
+        <mat-cell *matCellDef="let manager"> {{manager.costCenter?.companyName}} </mat-cell>
+      </ng-container>
+  
+      <!-- Ações Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let manager">
+          <button mat-icon-button color="primary" (click)="editarGerenteTecnico(manager)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deletarGerenteTecnico(manager.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
