@@ -17,7 +17,7 @@ export class EditComponent {
         title: '',
         costCenterId: '',
         costCenter: null,
-        components: []
+        formComponents: []
       };
       formComponents: IFormComponent[] = [];
       formComponentTypes = Object.values(FormComponentType);
@@ -38,7 +38,7 @@ export class EditComponent {
           this.formService.getById(formId).subscribe((form: IForm) => {
             this.form = form;
             this.selectedCostCenter = form.costCenter;
-            this.formComponents = [...form.components]; // Assume que `components` faz parte do objeto `IForm`
+            this.formComponents = [...form.formComponents]; // Assume que `components` faz parte do objeto `IForm`
           });
         }
       }
@@ -64,14 +64,14 @@ export class EditComponent {
         this.form.costCenter = this.selectedCostCenter;
     
         if (this.isEditMode) {
-          this.formService.update({ ...this.form, components: this.formComponents }).subscribe(() => {
+          this.formService.update({ ...this.form, formComponents: this.formComponents }).subscribe(() => {
             this.snackBar.open('Formulário atualizado com sucesso', 'Fechar', { duration: 3000 });
-            this.router.navigate(['/forms']);
+            this.router.navigate(['/form']);
           });
         } else {
-          this.formService.create({ ...this.form, components: this.formComponents }).subscribe(() => {
+          this.formService.create({ ...this.form, formComponents: this.formComponents }).subscribe(() => {
             this.snackBar.open('Formulário criado com sucesso', 'Fechar', { duration: 3000 });
-            this.router.navigate(['/forms']);
+            this.router.navigate(['/form']);
           });
         }
       }

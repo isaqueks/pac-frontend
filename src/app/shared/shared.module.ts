@@ -19,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatOptionModule } from '@angular/material/core';
 import { ClientSelectComponent } from './client-select/client-select.component';
 import { CostCenterSelectComponent } from './cost-center-select/cost-center-select.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { CostCenterSelectComponent } from './cost-center-select/cost-center-sele
     MatTableModule,
     MatSnackBarModule,
     MatOptionModule,
+    MatCheckboxModule,
     FormsModule,
     RouterModule,
     CommonModule
@@ -63,6 +65,7 @@ import { CostCenterSelectComponent } from './cost-center-select/cost-center-sele
     MatTableModule,
     MatSnackBarModule,
     MatOptionModule,
+    MatCheckboxModule,
     RouterModule,
     FormsModule,
     ClientSelectComponent,

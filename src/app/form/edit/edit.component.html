@@ -44,8 +44,10 @@
                     <option *ngFor="let type of formComponentTypes" [value]="type">{{type}}</option>
                   </select>
                 </mat-form-field>
-  
-                <mat-checkbox [(ngModel)]="component.required" name="compRequired">Obrigatório</mat-checkbox>
+
+                <mat-checkbox type="checkbox" [checked]="component.required" (change)="component.required = $event.checked;">
+                    Obrigatório
+                </mat-checkbox>
               </mat-card-content>
             </mat-card>
           </div>
