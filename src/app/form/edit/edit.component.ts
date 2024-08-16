@@ -14,13 +14,20 @@ import { FormService } from 'src/app/shared/form.service';
 export class EditComponent {
     form: IForm = {
         id: '',
-        title: '',
+        title: 'Novo Formulário',
         costCenterId: '',
         costCenter: null,
         formComponents: []
       };
       formComponents: IFormComponent[] = [];
-      formComponentTypes = Object.values(FormComponentType);
+      formComponentTypes = {
+        'Número': FormComponentType.NUMBER,
+        'Texto': FormComponentType.TEXT,
+        'Lista de Checkbox': FormComponentType.CHECKBOX_LIST,
+        'Lista de Rádio': FormComponentType.RADIO_LIST,
+        'Data': FormComponentType.DATE,
+        'Upload': FormComponentType.UPLOAD
+      }
       selectedCostCenter: ICostCenter = null;
       isEditMode = false;
     
@@ -46,9 +53,10 @@ export class EditComponent {
       addFormComponent(): void {
         this.formComponents.push({
           id: '',
-          title: '',
+          title: 'Nova Questão',
           subtitle: '',
           type: FormComponentType.TEXT,
+          options: [],
           required: false,
           formId: this.form.id,
           form: this.form
@@ -75,4 +83,12 @@ export class EditComponent {
           });
         }
       }
+
+      addOption(formComponent: IFormComponent): void {
+        formComponent.options.push('');
+      }
+
+        removeOption(formComponent: IFormComponent, index: number): void {
+            formComponent.options.splice(index, 1);
+        }
 }

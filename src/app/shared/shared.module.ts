@@ -20,6 +20,8 @@ import { MatOptionModule } from '@angular/material/core';
 import { ClientSelectComponent } from './client-select/client-select.component';
 import { CostCenterSelectComponent } from './cost-center-select/cost-center-select.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatCheckboxModule,
     FormsModule,
     RouterModule,
+    MatSlideToggleModule,
     CommonModule
   ],
   exports: [
@@ -70,6 +73,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     FormsModule,
     ClientSelectComponent,
     CostCenterSelectComponent,
+    MatSlideToggleModule,
     CommonModule
   ]
 })

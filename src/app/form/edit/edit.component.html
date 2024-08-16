@@ -1,61 +1,98 @@
 <div class="form-edit-container">
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{ isEditMode ? 'Editar Formulário' : 'Criar Formulário' }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="form-field">
-          <mat-form-field appearance="fill">
-            <mat-label>Título do Formulário</mat-label>
-            <input matInput [(ngModel)]="form.title" name="title" required>
-          </mat-form-field>
-        </div>
-  
-        <cost-center-select style="width: 100%;" [(value)]="selectedCostCenter"></cost-center-select>
-  
-        <mat-divider></mat-divider>
-  
-        <div class="form-components-section">
-          <h3>Componentes do Formulário</h3>
-          <button mat-raised-button color="primary" (click)="addFormComponent()">Adicionar Componente</button>
-  
-          <div *ngFor="let component of formComponents; let i = index" class="form-component">
-            <mat-card>
-              <mat-card-header>
-                <mat-card-title>Componente {{i + 1}}</mat-card-title>
-                <button mat-icon-button color="warn" (click)="removeFormComponent(i)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </mat-card-header>
-              <mat-card-content>
-                <mat-form-field appearance="fill">
-                  <mat-label>Título do Componente</mat-label>
-                  <input matInput [(ngModel)]="component.title" name="compTitle" required>
-                </mat-form-field>
-  
-                <mat-form-field appearance="fill">
-                  <mat-label>Subtítulo do Componente</mat-label>
-                  <input matInput [(ngModel)]="component.subtitle" name="compSubtitle">
-                </mat-form-field>
-  
-                <mat-form-field appearance="fill">
-                  <mat-label>Tipo do Componente</mat-label>
-                  <select matNativeControl [(ngModel)]="component.type" name="compType">
-                    <option *ngFor="let type of formComponentTypes" [value]="type">{{type}}</option>
-                  </select>
-                </mat-form-field>
+        <mat-card-header>
+            <mat-card-title>{{ isEditMode ? 'Editar Formulário' : 'Criar Formulário' }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
 
-                <mat-checkbox type="checkbox" [checked]="component.required" (change)="component.required = $event.checked;">
-                    Obrigatório
-                </mat-checkbox>
-              </mat-card-content>
-            </mat-card>
-          </div>
-        </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="saveForm()">Salvar Formulário</button>
-      </mat-card-actions>
+            <cost-center-select style="width: 100%;" [(value)]="selectedCostCenter"></cost-center-select>
+
+            <div class="form-field w-full">
+                <mat-form-field class="w-full" appearance="fill">
+                    <mat-label>Título do Formulário</mat-label>
+                    <input class="w-full" matInput [(ngModel)]="form.title" name="title" required>
+                </mat-form-field>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="form-components-section">
+                <mat-card-header>
+                    <mat-card-title>
+                        Componentes do Formulário
+                    </mat-card-title>
+                </mat-card-header>
+
+                <div *ngFor="let component of formComponents; let i = index" class="form-component mt-2 p-4">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-form-field appearance="fill" class="w-full">
+                                <mat-label>Título da Questão</mat-label>
+                                <input matInput [(ngModel)]="component.title" name="compTitle" required>
+                            </mat-form-field>
+                        </mat-card-header>
+                        <mat-card-content>
+
+                            <div class="grid grid-cols-3 gap-2">
+                                <mat-form-field appearance="fill" class="col-span-2">
+                                    <mat-label>Subtítulo da Questão</mat-label>
+                                    <input matInput [(ngModel)]="component.subtitle" name="compSubtitle">
+                                </mat-form-field>
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Tipo da Questão</mat-label>
+                                    <select matNativeControl [(ngModel)]="component.type" name="compType">
+                                        <option *ngFor="let type of formComponentTypes | keyvalue" [value]="type.value">{{type.key}}</option>
+                                    </select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="p-4" *ngIf="['radio_list', 'checkbox_list'].includes(component.type)">
+                                <div class="text-base">
+                                    Opções da lista
+                                </div>
+                                <mat-form-field class="w-full" *ngFor="let opt of component.options; let i = index">
+                                    <mat-label>Opção {{i+1}}</mat-label>
+                                    <input matInput [value]="opt"
+                                        (valueChange)="component.options[i] = $event.target['value']" name="option"
+                                        required>
+                                    <button matSuffix mat-icon-button color="warn" (click)="removeOption(component, i)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </mat-form-field>
+
+                                <button mat-raised-button color="primary" (click)="addOption(component)">
+                                    <mat-icon matIconPrefix>add</mat-icon>
+                                    Adicionar Opção
+                                </button>
+
+                            </div>
+                        </mat-card-content>
+                        <mat-divider></mat-divider>
+                        <mat-card-actions align="end">
+                            <mat-slide-toggle 
+                                [checked]="component.required"
+                                (change)="component.required = $event.checked;"
+                            >
+                                Obrigatório
+                            </mat-slide-toggle>
+                            <button mat-icon-button color="warn" (click)="removeFormComponent(i)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions class="grid grid-cols-2 gap-2">
+            <button mat-raised-button color="primary" (click)="saveForm()">
+                <mat-icon matIconPrefix>save</mat-icon>
+                Salvar Formulário
+            </button>
+            <button mat-raised-button color="primary" (click)="addFormComponent()">
+                <mat-icon matIconPrefix>add</mat-icon>
+                Adicionar Componente
+            </button>
+        </mat-card-actions>
     </mat-card>
-  </div>
-  
+</div>

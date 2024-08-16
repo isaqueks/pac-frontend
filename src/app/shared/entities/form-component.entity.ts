@@ -18,4 +18,5 @@ export interface IFormComponent extends IBaseEntity {
     required: boolean;
     form: IForm;
     formId: string;
+    options: string[];
 }
