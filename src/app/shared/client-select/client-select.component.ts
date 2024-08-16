@@ -14,6 +14,7 @@ export class ClientSelectComponent implements OnInit {
     @Output() valueChange: EventEmitter<IClient> = new EventEmitter<IClient>();
     @Input() value: IClient;
     @Input() label: string = 'Selecionar Cliente';
+    @Input() readOnly: boolean = false;
 
     clients: IClient[] = [];
 

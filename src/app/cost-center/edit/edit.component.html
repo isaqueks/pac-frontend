@@ -84,7 +84,7 @@
                 <option *ngFor="let client of clients" [value]="client.id">{{ client.companyName }}</option>
               </select>
             </mat-form-field> -->
-            <client-select [(value)]="selectedClient"></client-select>
+            <client-select class="w-full" [readOnly]="isEditMode" [(value)]="selectedClient"></client-select>
           </div>
   
           <button mat-raised-button color="primary" type="submit" [disabled]="!costCenterForm.valid">

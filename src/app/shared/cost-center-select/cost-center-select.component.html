@@ -5,14 +5,14 @@
 
   <mat-form-field class="form-field" appearance="fill" [attr.hidden]="!loading">
     <mat-label>Selecionar Cliente</mat-label>
-    <select matNativeControl (change)="selectClient($event)" [value]="selectedClient?.id">
+    <select [disabled]="readOnly" matNativeControl (change)="selectClient($event)" [value]="selectedClient?.id">
       <option *ngFor="let client of clients" [value]="client.id">{{ client.companyName }}</option>
     </select>
   </mat-form-field>
 
   <mat-form-field class="form-field" appearance="fill" [attr.hidden]="!loading">
     <mat-label>{{label}}</mat-label>
-    <select matNativeControl (change)="selectCostCenter($event)" [value]="value?.id">
+    <select [disabled]="readOnly" matNativeControl (change)="selectCostCenter($event)" [value]="value?.id">
       <option *ngFor="let costCenter of costCenters" [value]="costCenter.id">{{ costCenter.companyName }}</option>
     </select>
   </mat-form-field>

@@ -36,7 +36,7 @@
             </mat-form-field>
           </div>
   
-          <cost-center-select style="width: 100%;" [(value)]="selectedCostCenter"></cost-center-select>
+          <cost-center-select [readOnly]="isEditMode" style="width: 100%;" [(value)]="selectedCostCenter"></cost-center-select>
   
           <button mat-raised-button color="primary" type="submit" [disabled]="!managerForm.valid">
             {{ isEditMode ? 'Atualizar' : 'Criar' }}

@@ -16,6 +16,7 @@ export class CostCenterSelectComponent implements OnInit {
     @Output() valueChange: EventEmitter<ICostCenter> = new EventEmitter<ICostCenter>();
     @Input() value: ICostCenter;
     @Input() label: string = 'Selecionar Centro de Custo';
+    @Input() readOnly: boolean = false;
   
     clients: IClient[] = [];
     costCenters: ICostCenter[] = [];
