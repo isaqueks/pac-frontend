@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { defaultErrorHandler } from 'src/app/shared/defaultErrorHandler';
 import { ICostCenter } from 'src/app/shared/entities/cost-center.entity';
 import { ITechnicalManager } from 'src/app/shared/entities/technical-maneger.entity';
 import { TechnicianManagerService } from 'src/app/shared/technician-manager.service';
@@ -33,9 +34,9 @@ export class ListComponent {
         if (!this.selectedCostCenter) {
             return;
         }
-        this.technicalManagerService.getAllByCostCenter(this.selectedCostCenter.id).subscribe((managers: ITechnicalManager[]) => {
+        this.technicalManagerService.getAllByCostCenter(this.selectedCostCenter.id).subscribe(defaultErrorHandler((managers: ITechnicalManager[]) => {
             this.dataSource.data = managers;
-        });
+        }));
     }
   
     adicionarGerenteTecnico(): void {
@@ -47,8 +48,8 @@ export class ListComponent {
     }
   
     deletarGerenteTecnico(managerId: string): void {
-      this.technicalManagerService.delete(managerId).subscribe(() => {
+      this.technicalManagerService.delete(managerId).subscribe(defaultErrorHandler(() => {
         this.carregarGerentesTecnicos();
-      });
+      }));
     }
 }

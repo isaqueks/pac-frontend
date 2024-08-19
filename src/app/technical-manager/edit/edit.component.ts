@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { defaultErrorHandler } from 'src/app/shared/defaultErrorHandler';
 import { ICostCenter } from 'src/app/shared/entities/cost-center.entity';
 import { ITechnicalManager } from 'src/app/shared/entities/technical-maneger.entity';
 import { TechnicianManagerService } from 'src/app/shared/technician-manager.service';
@@ -38,14 +39,14 @@ export class EditComponent {
       if (managerId) {
         this.isEditMode = true;
         this.managerId = managerId;
-        this.technicalManagerService.getById(managerId).subscribe(manager => {
+        this.technicalManagerService.getById(managerId).subscribe(defaultErrorHandler(manager => {
           this.managerForm.patchValue({
             ...manager,
             email: manager.user?.email,
           });
           this.managerForm.get('password')?.disable();
           this.selectedCostCenter = manager.costCenter;
-        });
+        }));
       }
     }
   
@@ -60,19 +61,19 @@ export class EditComponent {
   
       if (this.isEditMode) {
         manager.id = this.managerId!;
-        this.technicalManagerService.update(manager).subscribe(() => {
+        this.technicalManagerService.update(manager).subscribe(defaultErrorHandler(() => {
           this.snackBar.open('Gerente Técnico atualizado com sucesso', 'Fechar', {
             duration: 3000
           });
           this.router.navigate(['/technical-manager']);
-        });
+        }));
       } else {
-        this.technicalManagerService.create(manager).subscribe(() => {
+        this.technicalManagerService.create(manager).subscribe(defaultErrorHandler(() => {
           this.snackBar.open('Gerente Técnico criado com sucesso', 'Fechar', {
             duration: 3000
           });
           this.router.navigate(['/technical-manager']);
-        });
+        }));
       }
     }
 }

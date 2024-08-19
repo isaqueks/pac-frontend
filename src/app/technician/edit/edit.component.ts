@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from 'src/app/shared/client.service';
 import { CostCenterService } from 'src/app/shared/cost-center.service';
+import { defaultErrorHandler } from 'src/app/shared/defaultErrorHandler';
 import { IClient } from 'src/app/shared/entities/client.entity';
 import { ICostCenter } from 'src/app/shared/entities/cost-center.entity';
 import { ITechnician } from 'src/app/shared/entities/techician.entity';
@@ -43,14 +44,14 @@ export class EditComponent {
     if (technicianId) {
       this.isEditMode = true;
       this.technicianId = technicianId;
-      this.technicianService.getById(technicianId).subscribe(technician => {
+      this.technicianService.getById(technicianId).subscribe(defaultErrorHandler(technician => {
         this.technicianForm.patchValue({
             ...technician,
             email: technician.user?.email,
         });
         this.technicianForm.get('password')?.disable();
         this.selectedCostCenter = technician.costCenter;
-      });
+      }));
     }
   }
 
@@ -65,19 +66,19 @@ export class EditComponent {
 
     if (this.isEditMode) {
       technician.id = this.technicianId!;
-      this.technicianService.update(technician).subscribe(() => {
+      this.technicianService.update(technician).subscribe(defaultErrorHandler(() => {
         this.snackBar.open('Técnico atualizado com sucesso', 'Fechar', {
           duration: 3000
         });
         this.router.navigate(['/technician']);
-      });
+      }));
     } else {
-      this.technicianService.create(technician).subscribe(() => {
+      this.technicianService.create(technician).subscribe(defaultErrorHandler(() => {
         this.snackBar.open('Técnico criado com sucesso', 'Fechar', {
           duration: 3000
         });
         this.router.navigate(['/technician']);
-      });
+      }));
     }
   }
 }

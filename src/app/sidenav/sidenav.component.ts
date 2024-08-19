@@ -47,7 +47,7 @@ export class SidenavComponent {
         { label: 'Técnicos', icon: 'person', path: 'technician', perms: [UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER, UserRoleEnum.CLIENT] },
         { label: 'Responsáveis Técnicos', icon: 'help', path: 'technical-manager', perms: [UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER, UserRoleEnum.CLIENT] },
         { label: 'Formulários', icon: 'help', path: 'form', perms: [
-            UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER, UserRoleEnum.TECHNICIAN, UserRoleEnum.TECHNICAL_MANAGER
+            UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER, UserRoleEnum.CLIENT, UserRoleEnum.TECHNICIAN, UserRoleEnum.TECHNICAL_MANAGER
         ] },
       ];
     

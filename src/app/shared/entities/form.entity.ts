@@ -6,6 +6,6 @@ export interface IForm extends IBaseEntity {
     title: string;
     costCenter: ICostCenter;
     costCenterId: string;
-    formComponents: IFormComponent[];
+    components?: IFormComponent[];
   }
   

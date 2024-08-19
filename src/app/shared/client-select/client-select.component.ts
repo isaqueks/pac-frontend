@@ -3,6 +3,7 @@ import { IClient } from '../entities/client.entity';
 import { ClientService } from '../client.service';
 import { AuthService } from '../auth.service';
 import { UserRoleEnum } from '../entities/user.role';
+import { CostCenterService } from '../cost-center.service';
 
 @Component({
   selector: 'client-select',
@@ -22,6 +23,7 @@ export class ClientSelectComponent implements OnInit {
 
     constructor(
         private clientService: ClientService,
+        private cc: CostCenterService,
         private auth: AuthService
     ) {}
 
@@ -53,6 +55,14 @@ export class ClientSelectComponent implements OnInit {
                 this.clients = [client];
                 this.selectClient({ target: { value: client.id } });
                 this.loading = false;
+            }
+            else if (user.role === UserRoleEnum.COST_CENTER) {
+                this.cc.getById(user.costCenter.clientId).subscribe(costCenter => {
+                    const { client } = costCenter;
+                    this.clients = [client];
+                    this.selectClient({ target: { value: client.id } });
+                    this.loading = false;
+                });
             }
             else {
                 this.loading = false;

@@ -3,7 +3,7 @@
       <span>Formulários</span>
       <cost-center-select (valueChange)="onCostCenterSelect($event)"></cost-center-select>
       <span class="spacer"></span>
-      <button mat-raised-button color="primary" [routerLink]="'edit'">Adicionar Formulário</button>
+      <button mat-raised-button color="primary" [routerLink]="'edit'" *ngIf="user.role === roles.COST_CENTER">Adicionar Formulário</button>
     </mat-toolbar>
   
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -26,6 +26,9 @@
           <!-- <button mat-icon-button color="primary" (click)="editarFormulario(form)">
             <mat-icon>edit</mat-icon>
           </button> -->
+          <button mat-icon-button color="primary" (click)="executeForm(form)">
+            <mat-icon>play_arrow</mat-icon>
+          </button>
           <button mat-icon-button color="warn" (click)="deletarFormulario(form.id)">
             <mat-icon>delete</mat-icon>
           </button>

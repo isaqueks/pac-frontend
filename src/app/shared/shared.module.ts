@@ -21,6 +21,9 @@ import { ClientSelectComponent } from './client-select/client-select.component';
 import { CostCenterSelectComponent } from './cost-center-select/cost-center-select.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -49,6 +52,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     FormsModule,
     RouterModule,
     MatSlideToggleModule,
+    MatTabsModule,
+    MatRadioModule,
+    MatDatepickerModule,
     CommonModule
   ],
   exports: [
@@ -74,6 +80,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ClientSelectComponent,
     CostCenterSelectComponent,
     MatSlideToggleModule,
+    MatTabsModule,
+    MatRadioModule,
+    MatDatepickerModule,
     CommonModule
   ]
 })

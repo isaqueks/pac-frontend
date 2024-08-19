@@ -54,7 +54,7 @@
                                 <mat-form-field class="w-full" *ngFor="let opt of component.options; let i = index">
                                     <mat-label>Opção {{i+1}}</mat-label>
                                     <input matInput [value]="opt"
-                                        (valueChange)="component.options[i] = $event.target['value']" name="option"
+                                        (change)="component.options[i] = $event.target['value']" name="option"
                                         required>
                                     <button matSuffix mat-icon-button color="warn" (click)="removeOption(component, i)">
                                         <mat-icon>delete</mat-icon>

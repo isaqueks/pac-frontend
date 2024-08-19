@@ -1,0 +1,18 @@
+<mat-tab-group>
+    <mat-tab label="Responder Formulário" *ngIf="user?.role === roles.TECHNICIAN">
+        <ng-template matTabContent>
+
+            <mat-progress-bar [mode]="'indeterminate'" *ngIf="loading"></mat-progress-bar>
+            <app-create-execution *ngIf="form" [form]="form"></app-create-execution>
+
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Respostas">
+        <ng-template matTabContent>
+
+            <mat-progress-bar [mode]="'indeterminate'" *ngIf="loading"></mat-progress-bar>
+            <app-execution-list *ngIf="form" [form]="form"></app-execution-list>
+
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

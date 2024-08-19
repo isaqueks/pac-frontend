@@ -1,0 +1,91 @@
+<mat-progress-bar [mode]="'indeterminate'" *ngIf="loading"></mat-progress-bar>
+<div class="form-fill-container" *ngIf="form">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ form.title }}</mat-card-title>
+            <mat-card-subtitle>{{ form.costCenter?.companyName }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <form>
+                <div *ngFor="let component of form.components; let i = index">
+                    <ng-container [ngSwitch]="component.type">
+                        <mat-card class="p-3 mt-3">
+                            <mat-card-header>
+                                <mat-card-title>{{ component.title }}</mat-card-title>
+                                <mat-card-subtitle>{{ component.subtitle }}</mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content>
+
+                                <!-- Campo Numérico -->
+                                <div *ngSwitchCase="'number'">
+                                    <mat-form-field appearance="fill" class="form-field w-full">
+                                        <mat-label>{{ component.title }}</mat-label>
+                                        <input matInput type="number" [disabled]="readOnly" [required]="component.required" [value]="values[i]" (change)="values[i] = $event.target['value']">
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- Campo Texto -->
+                                <div *ngSwitchCase="'text'">
+                                    <mat-form-field appearance="fill" class="form-field w-full">
+                                        <mat-label>{{ component.title }}</mat-label>
+                                        <input matInput type="text" [disabled]="readOnly" [required]="component.required" [value]="values[i]" (change)="values[i] = $event.target['value']">
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- Lista de Checkboxes -->
+                                <div *ngSwitchCase="'checkbox_list'">
+                                    <!-- <mat-label>{{ component.title }}</mat-label> -->
+                                    <mat-checkbox *ngFor="let option of component.options; let j = index"
+                                        [required]="component.required" [disabled]="readOnly" [checked]="values[i][j]" (change)="values[i][j] = $event.checked">
+                                        {{ option }}
+                                    </mat-checkbox>
+                                </div>
+
+                                <!-- Lista de Rádio -->
+                                <div *ngSwitchCase="'radio_list'">
+                                    <!-- <mat-label>{{ component.title }}</mat-label> -->
+                                    <mat-radio-group [disabled]="readOnly" [required]="component.required" [value]="values[i]" (change)="values[i] = $event.value">
+                                        <mat-radio-button *ngFor="let option of component.options"
+                                            [value]="option">
+                                            {{ option }}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+
+                                <!-- Campo de Data -->
+                                <div *ngSwitchCase="'date'">
+                                    <mat-form-field appearance="fill" class="form-field">
+                                        <mat-label>{{ component.title }}</mat-label>
+                                        <input [disabled]="readOnly" [value]="values[i]" matInput [matDatepicker]="picker"
+                                            [required]="component.required" (change)="values[i] = $event.target['value']">
+                                        <mat-datepicker-toggle matSuffix
+                                            [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- Campo de Upload -->
+                                <div *ngSwitchCase="'upload'">
+                                    <mat-form-field appearance="fill" class="form-field">
+                                        <mat-label>{{ component.title }}</mat-label>
+                                        <input [disabled]="readOnly" type="file" matInput [required]="component.required">
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- Tipo Desconhecido -->
+                                <div *ngSwitchDefault>
+                                    <p>Tipo de componente não suportado: {{ component.type }}</p>
+                                </div>
+
+                            </mat-card-content>
+                        </mat-card>
+                    </ng-container>
+
+                    <mat-divider></mat-divider>
+                </div>
+
+                <button *ngIf="!readOnly" mat-raised-button color="primary" (click)="submit()">Enviar Respostas</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

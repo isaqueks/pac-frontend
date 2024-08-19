@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { defaultErrorHandler } from 'src/app/shared/defaultErrorHandler';
 import { ICostCenter } from 'src/app/shared/entities/cost-center.entity';
 import { ITechnician } from 'src/app/shared/entities/techician.entity';
 import { TechnicianService } from 'src/app/shared/technician.service';
@@ -33,9 +34,9 @@ export class ListComponent {
         if (!this.selectedCostCenter) {
             return;
         }
-      this.technicianService.getAllByCostCenter(this.selectedCostCenter.id).subscribe((technicians: ITechnician[]) => {
+      this.technicianService.getAllByCostCenter(this.selectedCostCenter.id).subscribe(defaultErrorHandler((technicians: ITechnician[]) => {
         this.dataSource.data = technicians;
-      });
+      }));
     }
   
     adicionarTecnico(): void {
@@ -47,8 +48,8 @@ export class ListComponent {
     }
   
     deletarTecnico(technicianId: string): void {
-      this.technicianService.delete(technicianId).subscribe(() => {
+      this.technicianService.delete(technicianId).subscribe(defaultErrorHandler(() => {
         this.carregarTecnicos();
-      });
+      }));
     }
 }

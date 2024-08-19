@@ -1,0 +1,27 @@
+<div class="form-execution-list-container">
+    <mat-toolbar>
+      <span>Respostas do Formulário</span>
+      <span class="spacer"></span>
+    </mat-toolbar>
+  
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Técnico Responsável Column -->
+      <ng-container matColumnDef="technician">
+        <mat-header-cell *matHeaderCellDef> Técnico Responsável </mat-header-cell>
+        <mat-cell *matCellDef="let execution"> {{execution.technician?.name}} </mat-cell>
+      </ng-container>
+  
+      <!-- Ações Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let execution">
+          <button mat-icon-button color="primary" (click)="viewExecution(execution)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+</div>

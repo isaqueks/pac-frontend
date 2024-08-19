@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { UserRoleEnum } from '../entities/user.role';
 import { ICostCenter } from '../entities/cost-center.entity';
 import { CostCenterService } from '../cost-center.service';
+import { defaultErrorHandler } from '../defaultErrorHandler';
 
 @Component({
   selector: 'cost-center-select',
@@ -79,10 +80,19 @@ export class CostCenterSelectComponent implements OnInit {
           this.loading = false;
         }
         else if (user.role === UserRoleEnum.COST_CENTER) {
-          const { costCenter } = user;
-          this.costCenters = [costCenter];
-          this.selectCostCenter({ target: { value: costCenter.id } });
-          this.loading = false;
+          this.costCenterService.getById(user.costCenter.id).subscribe(defaultErrorHandler(costCenter => {
+            this.clients = [costCenter.client];
+            this.costCenters = [costCenter];
+            this.selectCostCenter({ target: { value: costCenter.id } });
+            this.loading = false;
+          }));
+        }
+        else if (user.role === UserRoleEnum.TECHNICIAN) {
+            this.costCenterService.getById(user.technician.costCenterId).subscribe(costCenter => {
+                this.costCenters = [costCenter];
+                this.selectCostCenter({ target: { value: costCenter.id } });
+                this.loading = false;
+            });
         }
         else {
           this.loading = false;

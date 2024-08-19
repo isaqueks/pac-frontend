@@ -1,0 +1,25 @@
+.technical-manager-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  mat-card {
+    width: 600px;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .form-field {
+    flex: 0 0 48%;
+  }
+  
+  button {
+    width: 100%;
+    margin-top: 16px;
+  }
+  
