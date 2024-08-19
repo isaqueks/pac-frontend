@@ -2,6 +2,12 @@
     <mat-sidenav #drawer class="sidenav" mode="side" [opened]="!!user">
       <mat-toolbar>Menu</mat-toolbar>
       <mat-nav-list *ngIf="user">
+        <mat-list-item [routerLink]="'/'">
+            <button mat-button>
+                <mat-icon>home</mat-icon>
+                <span>Início</span>
+            </button>
+        </mat-list-item>
         <ng-container *ngFor="let item of menuItems">
             <mat-list-item *ngIf="item.perms.includes(user.role)" (click)="onMenuItemClick(item)" [routerLink]="item.path">
                 <button mat-button>

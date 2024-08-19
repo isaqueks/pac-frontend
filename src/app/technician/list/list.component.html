@@ -22,7 +22,7 @@
       <!-- Documento Column -->
       <ng-container matColumnDef="document">
         <mat-header-cell *matHeaderCellDef> Documento </mat-header-cell>
-        <mat-cell *matCellDef="let technician"> {{technician.document}} </mat-cell>
+        <mat-cell *matCellDef="let technician"> {{technician.document | cpfCnpj}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="email">

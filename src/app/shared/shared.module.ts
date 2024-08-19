@@ -24,6 +24,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { CpfCnpjPipe } from './cpf-cnpj.pipe';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
   
     ClientSelectComponent,
     CostCenterSelectComponent,
+    CpfCnpjPipe,
   ],
   imports: [
     ReactiveFormsModule,
@@ -85,6 +87,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    CpfCnpjPipe,
     CommonModule
   ]
 })

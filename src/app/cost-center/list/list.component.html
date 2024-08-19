@@ -29,7 +29,7 @@
       <!-- CNPJ Column -->
       <ng-container matColumnDef="cnpj">
         <mat-header-cell *matHeaderCellDef> CNPJ </mat-header-cell>
-        <mat-cell *matCellDef="let costCenter"> {{costCenter.cnpj}} </mat-cell>
+        <mat-cell *matCellDef="let costCenter"> {{costCenter.cnpj | cpfCnpj}} </mat-cell>
       </ng-container>
   
       <!-- Usuário Column -->

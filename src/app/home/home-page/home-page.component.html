@@ -1,4 +1,51 @@
 <mat-spinner *ngIf="!user"></mat-spinner>
 <ng-container *ngIf="user">
-    Você está logado como {{ user.email }}
+    <div class="home-container">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Bem-vindo, {{ user.email }}</mat-card-title>
+            <mat-card-subtitle>{{ getUserRoleLabel(user.role) }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+      
+            <!-- Informações de Cliente -->
+            <ng-container *ngIf="user.client">
+              <h3>Informações do Cliente</h3>
+              <p><strong>Nome da Empresa:</strong> {{ user.client.companyName }}</p>
+              <p><strong>Nome Fantasia:</strong> {{ user.client.businessName }}</p>
+              <p><strong>CNPJ:</strong> {{ user.client.cnpj }}</p>
+            </ng-container>
+      
+            <!-- Informações de Centro de Custo -->
+            <ng-container *ngIf="user.costCenter">
+              <h3>Informações do Centro de Custo</h3>
+              <p><strong>Nome do Centro de Custo:</strong> {{ user.costCenter.companyName }}</p>
+              <p><strong>Endereço:</strong> {{ user.costCenter.addressStreet }}, {{ user.costCenter.addressNumber }}</p>
+              <p><strong>Cidade:</strong> {{ user.costCenter.addressCity }}, {{ user.costCenter.addressState }}</p>
+            </ng-container>
+      
+            <!-- Informações de Técnico -->
+            <ng-container *ngIf="user.technician">
+              <h3>Informações do Técnico</h3>
+              <p><strong>Nome:</strong> {{ user.technician.name }}</p>
+              <p><strong>Documento:</strong> {{ user.technician.document }}</p>
+              <p><strong>Telefone:</strong> {{ user.technician.phone }}</p>
+            </ng-container>
+      
+            <!-- Informações de Gerente Técnico -->
+            <ng-container *ngIf="user.technicalManager">
+              <h3>Informações do Responsável Técnico</h3>
+              <p><strong>Nome:</strong> {{ user.technicalManager.name }}</p>
+              <p><strong>Documento:</strong> {{ user.technicalManager.document }}</p>
+              <p><strong>Telefone:</strong> {{ user.technicalManager.phone }}</p>
+            </ng-container>
+      
+            <!-- Informações Genéricas -->
+            <ng-container *ngIf="!user.client && !user.costCenter && !user.technician && !user.technicalManager">
+              <p>Não há informações adicionais disponíveis para o seu perfil.</p>
+            </ng-container>
+      
+          </mat-card-content>
+        </mat-card>
+      </div>
 </ng-container>
