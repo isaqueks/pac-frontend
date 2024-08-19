@@ -20,12 +20,12 @@
           <div class="form-row">
             <mat-form-field class="form-field" appearance="fill">
               <mat-label>CNPJ</mat-label>
-              <input matInput formControlName="cnpj" required>
+              <input matInput mask="00.000.000/0000-00" formControlName="cnpj" required>
             </mat-form-field>
   
             <mat-form-field class="form-field" appearance="fill">
               <mat-label>CEP</mat-label>
-              <input matInput formControlName="addressZipCode">
+              <input matInput mask="00000-000" formControlName="addressZipCode">
             </mat-form-field>
           </div>
   

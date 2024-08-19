@@ -1,7 +1,7 @@
 <div class="technician-list-container">
     <mat-toolbar>
       <span>Técnicos</span>
-      <cost-center-select (valueChange)="onCostCenterSelect($event)"></cost-center-select>
+      <cost-center-select class="h-[50px] ml-3" (valueChange)="onCostCenterSelect($event)"></cost-center-select>
       <span class="spacer"></span>
       <button mat-raised-button color="primary" [routerLink]="'edit'">Adicionar Técnico</button>
     </mat-toolbar>

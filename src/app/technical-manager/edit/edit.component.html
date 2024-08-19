@@ -13,14 +13,14 @@
   
             <mat-form-field class="form-field" appearance="fill">
               <mat-label>Telefone</mat-label>
-              <input matInput formControlName="phone">
+              <input matInput mask="(00) 00000-0000||(00) 0000-0000" formControlName="phone">
             </mat-form-field>
           </div>
   
           <div class="form-row">
             <mat-form-field class="form-field" appearance="fill">
               <mat-label>Documento</mat-label>
-              <input matInput formControlName="document" required>
+              <input matInput mask="000.000.000-00||00.000.000/0000-00" formControlName="document" required>
             </mat-form-field>
           </div>
   

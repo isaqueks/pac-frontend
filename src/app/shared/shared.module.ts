@@ -25,7 +25,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { CpfCnpjPipe } from './cpf-cnpj.pipe';
-
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,9 @@ import { CpfCnpjPipe } from './cpf-cnpj.pipe';
     ClientSelectComponent,
     CostCenterSelectComponent,
     CpfCnpjPipe,
+  ],
+  providers: [
+    provideNgxMask()
   ],
   imports: [
     ReactiveFormsModule,
@@ -58,6 +61,7 @@ import { CpfCnpjPipe } from './cpf-cnpj.pipe';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NgxMaskDirective,
     CommonModule
   ],
   exports: [
@@ -88,6 +92,7 @@ import { CpfCnpjPipe } from './cpf-cnpj.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     CpfCnpjPipe,
+    NgxMaskDirective,
     CommonModule
   ]
 })

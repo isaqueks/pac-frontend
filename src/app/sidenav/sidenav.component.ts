@@ -42,8 +42,8 @@ export class SidenavComponent {
     }
 
     menuItems = [
-        { label: 'Centros de Custo', icon: 'domain', path: 'cost-center', perms: [UserRoleEnum.ADMIN, UserRoleEnum.CLIENT] },
         { label: 'Clientes', icon: 'domain', path: 'client', perms: [UserRoleEnum.ADMIN] },
+        { label: 'Centros de Custo', icon: 'domain', path: 'cost-center', perms: [UserRoleEnum.ADMIN, UserRoleEnum.CLIENT] },
         { label: 'Técnicos', icon: 'person', path: 'technician', perms: [UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER, UserRoleEnum.CLIENT] },
         { label: 'Responsáveis Técnicos', icon: 'person', path: 'technical-manager', perms: [UserRoleEnum.ADMIN, UserRoleEnum.COST_CENTER, UserRoleEnum.CLIENT] },
         { label: 'Formulários', icon: 'checklist', path: 'form', perms: [

@@ -7,7 +7,7 @@
           <option *ngFor="let client of clients" [value]="client.id">{{ client.companyName }}</option>
         </select>
       </mat-form-field> -->
-      <client-select (valueChange)="onClientChange($event)"></client-select>
+      <client-select class="h-[50px] ml-3" (valueChange)="onClientChange($event)"></client-select>
       <span class="spacer"></span>
       <button mat-raised-button color="primary" [routerLink]="'edit'">Adicionar Centro de Custo</button>
     </mat-toolbar>
