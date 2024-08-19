@@ -23,6 +23,8 @@ export class CreateExecutionComponent implements OnInit {
     @Input() readOnlyNotes: boolean = false;
     @Input() execId: string;
 
+    initialNotes = [];
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -55,6 +57,12 @@ export class CreateExecutionComponent implements OnInit {
 
             return null;
         });
+
+        this.initialNotes = structuredClone(this.notes);
+    }
+
+    notesChanged() {
+        return !this.notes.every((note, i) => note.value === this.initialNotes[i].value);
     }
 
     submit() {
@@ -87,6 +95,7 @@ export class CreateExecutionComponent implements OnInit {
                 pending--;
                 if (pending === 0) {
                     this.loading = false;
+                    this.router.navigate(['/form']);
                 }
             }));
         });

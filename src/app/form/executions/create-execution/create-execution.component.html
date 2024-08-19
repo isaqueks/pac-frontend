@@ -96,7 +96,7 @@
                     <button *ngIf="!readOnly" mat-raised-button color="primary" (click)="submit()">
                         Enviar Respostas
                     </button>
-                    <button *ngIf="showNotes && !readOnlyNotes" mat-raised-button color="primary" (click)="submitNotes()">
+                    <button [disabled]="!notesChanged()" *ngIf="showNotes && !readOnlyNotes" mat-raised-button color="primary" (click)="submitNotes()">
                         Salvar Observações
                     </button>
                 </div>
