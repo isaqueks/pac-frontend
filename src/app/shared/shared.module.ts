@@ -16,7 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { ClientSelectComponent } from './client-select/client-select.component';
 import { CostCenterSelectComponent } from './cost-center-select/cost-center-select.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -55,6 +55,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatTabsModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     CommonModule
   ],
   exports: [
@@ -83,6 +84,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatTabsModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     CommonModule
   ]
 })

@@ -38,7 +38,7 @@ export class FormService implements IEntityService<IForm> {
         return this.http.delete<void>(`/forms/${id}`);
     }
 
-    execute(formId: string, techId: string, values: { formComponentId, value }[]): Observable<void> {
+    execute(formId: string, techId: string, values: { formComponentId, value }[]): Observable<any> {
         return this.http.post<void>(`/executions`, {
             formId: formId,
             technicianId: techId,
@@ -52,5 +52,13 @@ export class FormService implements IEntityService<IForm> {
 
     getExecutionById(execId: string): Observable<IFormExecution> {
         return this.http.get<any>(`/executions/${execId}`);
+    }
+
+    deleteExecution(execId: string): Observable<void> {
+        return this.http.delete<void>(`/executions/${execId}`);
+    }
+
+    setNote(execId: string, execValId: string, note: string): Observable<any> {
+        return this.http.patch<void>(`/executions/${execId}/values/${execValId}/notes`, { note });
     }
 }

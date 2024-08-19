@@ -4,13 +4,17 @@
       <mat-nav-list *ngIf="user">
         <ng-container *ngFor="let item of menuItems">
             <mat-list-item *ngIf="item.perms.includes(user.role)" (click)="onMenuItemClick(item)" [routerLink]="item.path">
-                <mat-icon>{{ item.icon }}</mat-icon>
-                <span>{{ item.label }}</span>
+                <button mat-button>
+                    <mat-icon matIconPrefix>{{ item.icon }}</mat-icon>
+                    <span>{{ item.label }}</span>
+                </button>
             </mat-list-item>
         </ng-container>
         <mat-list-item (click)="logout()">
-            <mat-icon>logout</mat-icon>
-            <span>Log-out</span>
+            <button mat-button>
+                <mat-icon>logout</mat-icon>
+                <span>Log-out</span>
+            </button>
         </mat-list-item>
       </mat-nav-list>
       <mat-spinner *ngIf="!user"></mat-spinner>

@@ -1,4 +1,5 @@
-<mat-tab-group>
+<mat-progress-bar *ngIf="loading"></mat-progress-bar>
+<mat-tab-group *ngIf="user">
     <mat-tab label="Responder Formulário" *ngIf="user?.role === roles.TECHNICIAN">
         <ng-template matTabContent>
 

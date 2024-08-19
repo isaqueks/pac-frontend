@@ -9,6 +9,8 @@ export interface IFormExecution extends IBaseEntity {
     formId: string;
     executionValues: Array<{
         formComponentId: string; 
+        id: string;
+        note: string;
         value: string;
     }>;
 

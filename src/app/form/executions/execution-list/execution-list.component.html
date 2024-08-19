@@ -10,6 +10,11 @@
         <mat-header-cell *matHeaderCellDef> Técnico Responsável </mat-header-cell>
         <mat-cell *matCellDef="let execution"> {{execution.technician?.name}} </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef> Respondido em </mat-header-cell>
+        <mat-cell *matCellDef="let execution"> {{execution.createdAt | date: 'dd/MM/yyyy HH:mm'}} </mat-cell>
+      </ng-container>
   
       <!-- Ações Column -->
       <ng-container matColumnDef="actions">
@@ -18,6 +23,11 @@
           <button mat-icon-button color="primary" (click)="viewExecution(execution)">
             <mat-icon>visibility</mat-icon>
           </button>
+
+            <button mat-icon-button color="warn" (click)="deleteExecution(execution)">
+                <mat-icon>delete</mat-icon>
+            </button>
+
         </mat-cell>
       </ng-container>
   

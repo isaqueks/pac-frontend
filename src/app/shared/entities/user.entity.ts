@@ -13,6 +13,6 @@ export interface IUser extends IBaseEntity {
     client?: IClient;
     costCenter?: ICostCenter;
     technician?: ITechnician;
-    technicianManager?: ITechnicalManager;
+    technicalManager?: ITechnicalManager;
   }
   

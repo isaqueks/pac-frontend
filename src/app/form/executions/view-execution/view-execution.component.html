@@ -13,5 +13,13 @@
             
         </mat-card-content>
     </mat-card>
-    <app-create-execution [form]="form" [values]="values" [readOnly]="true"></app-create-execution>
+    <app-create-execution 
+        [form]="form" 
+        [showNotes]="true"
+        [readOnlyNotes]="user.role !== roles.TECHNICAL_MANAGER" 
+        [values]="values" 
+        [readOnly]="true"
+        [notes]="notes"
+        [execId]="execution.id"
+    ></app-create-execution>
 </ng-container>

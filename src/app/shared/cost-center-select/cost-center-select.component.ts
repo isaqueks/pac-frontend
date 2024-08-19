@@ -88,11 +88,20 @@ export class CostCenterSelectComponent implements OnInit {
           }));
         }
         else if (user.role === UserRoleEnum.TECHNICIAN) {
-            this.costCenterService.getById(user.technician.costCenterId).subscribe(costCenter => {
+            this.costCenterService.getById(user.technician.costCenterId).subscribe(defaultErrorHandler(costCenter => {
+                this.clients = [costCenter.client];
                 this.costCenters = [costCenter];
                 this.selectCostCenter({ target: { value: costCenter.id } });
                 this.loading = false;
-            });
+            }));
+        }
+        else if (user.role === UserRoleEnum.TECHNICAL_MANAGER) {
+            this.costCenterService.getById(user.technicalManager.costCenterId).subscribe(defaultErrorHandler(costCenter => {
+                this.clients = [costCenter.client];
+                this.costCenters = [costCenter];
+                this.selectCostCenter({ target: { value: costCenter.id } });
+                this.loading = false;
+            }));
         }
         else {
           this.loading = false;

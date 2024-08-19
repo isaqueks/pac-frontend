@@ -57,7 +57,7 @@
                                     <mat-form-field appearance="fill" class="form-field">
                                         <mat-label>{{ component.title }}</mat-label>
                                         <input [disabled]="readOnly" [value]="values[i]" matInput [matDatepicker]="picker"
-                                            [required]="component.required" (change)="values[i] = $event.target['value']">
+                                            [required]="component.required" (dateChange)="values[i] = $event.value">
                                         <mat-datepicker-toggle matSuffix
                                             [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
@@ -78,13 +78,28 @@
                                 </div>
 
                             </mat-card-content>
+                            <mat-card-footer *ngIf="(!readOnly && component.required) || showNotes" class="p-3">
+                                <mat-card-subtitle *ngIf="!readOnly && component.required">Obrigatório</mat-card-subtitle>
+
+                                <mat-form-field *ngIf="showNotes" appearance="fill" class="form-field w-full">
+                                    <mat-label>Observações</mat-label>
+                                    <textarea matInput type="text" [disabled]="readOnlyNotes" [value]="notes[i]?.value || ''" (change)="notes[i].value = $event.target['value']"></textarea>
+                                </mat-form-field>
+                            </mat-card-footer>
                         </mat-card>
                     </ng-container>
 
                     <mat-divider></mat-divider>
                 </div>
 
-                <button *ngIf="!readOnly" mat-raised-button color="primary" (click)="submit()">Enviar Respostas</button>
+                <div class="mt-3">
+                    <button *ngIf="!readOnly" mat-raised-button color="primary" (click)="submit()">
+                        Enviar Respostas
+                    </button>
+                    <button *ngIf="showNotes && !readOnlyNotes" mat-raised-button color="primary" (click)="submitNotes()">
+                        Salvar Observações
+                    </button>
+                </div>
             </form>
         </mat-card-content>
     </mat-card>

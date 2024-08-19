@@ -18,7 +18,7 @@ export class ExecutionListComponent implements OnInit {
 
     executions: IFormExecution[] = [];
 
-    displayedColumns: string[] = ['technician', 'actions'];
+    displayedColumns: string[] = ['technician', 'createdAt', 'actions'];
     dataSource: MatTableDataSource<IFormExecution> = new MatTableDataSource<IFormExecution>();
 
     constructor(
@@ -26,7 +26,7 @@ export class ExecutionListComponent implements OnInit {
         private router: Router
     ) {}
 
-    ngOnInit(): void {
+    load() {
         this.loading = true;
         this.formService.getExecutions(this.form.id).subscribe(executions => {
             this.executions = executions;
@@ -35,8 +35,19 @@ export class ExecutionListComponent implements OnInit {
         });
     }
 
+    ngOnInit(): void {
+        this.load();
+    }
+
     viewExecution(execution) { 
         this.router.navigate(['/form/view-execution/', execution.id]);
+    }
+
+    deleteExecution(execution) {
+        this.loading = true;
+        this.formService.deleteExecution(execution.id).subscribe(() => {
+            this.load();
+        });
     }
 
 }
