@@ -15,7 +15,7 @@ import { FormService } from 'src/app/shared/form.service';
     styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-    displayedColumns: string[] = ['title', 'costCenter', 'actions'];
+    displayedColumns: string[] = ['title', 'costCenter', 'createdAt', 'actions'];
     dataSource: MatTableDataSource<IForm> = new MatTableDataSource<IForm>();
     selectedCostCenter: ICostCenter = null;
 

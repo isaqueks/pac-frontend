@@ -18,6 +18,12 @@
         <mat-header-cell *matHeaderCellDef> Centro de Custo </mat-header-cell>
         <mat-cell *matCellDef="let form"> {{form.costCenter?.companyName}} </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef> Criada em </mat-header-cell>
+        <mat-cell *matCellDef="let form"> {{form.createdAt | date: 'dd/MM/yyyy HH:mm'}} </mat-cell>
+      </ng-container>
+  
   
       <!-- Ações Column -->
       <ng-container matColumnDef="actions">
