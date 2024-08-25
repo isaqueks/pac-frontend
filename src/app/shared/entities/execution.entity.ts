@@ -1,5 +1,6 @@
 import { IBaseEntity } from "./base.entity";
 import { ITechnician } from "./techician.entity";
+import { ITechnicalManager } from "./technical-maneger.entity";
 
 
 export interface IFormExecution extends IBaseEntity {
@@ -10,6 +11,7 @@ export interface IFormExecution extends IBaseEntity {
     executionValues: Array<{
         formComponentId: string; 
         justification?: string;
+        technicalManager?: ITechnicalManager;
         id: string;
         note: string;
         value: string;

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 import { defaultErrorHandler } from 'src/app/shared/defaultErrorHandler';
 import { FormComponentType } from 'src/app/shared/entities/form-component.entity';
 import { IForm } from 'src/app/shared/entities/form.entity';
+import { ITechnicalManager } from 'src/app/shared/entities/technical-maneger.entity';
 import { FormService } from 'src/app/shared/form.service';
 import Swal from 'sweetalert2';
 
@@ -53,7 +54,8 @@ export class CreateExecutionComponent implements OnInit {
 
             this.notes[i] = {
                 execValueId: this.notes?.[i]?.execValueId,
-                value: this.notes?.[i]?.value || ''
+                value: this.notes?.[i]?.value || '',
+                techManager: this.notes?.[i]?.techManager
             };
 
             this.justifications[i] = this.justifications?.[i] || '';

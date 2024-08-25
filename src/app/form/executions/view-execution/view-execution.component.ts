@@ -43,6 +43,7 @@ export class ViewExecutionComponent implements OnInit {
             this.notes = formExecution.executionValues.map(ev => {
                 return {
                     execValueId: ev.id,
+                    techManager: ev.technicalManager,
                     value: ev.note
                 };
             });
