@@ -66,16 +66,21 @@
 
                                 <!-- Campo de Upload -->
                                 <div *ngSwitchCase="'upload'">
-                                    <mat-form-field appearance="fill" class="form-field">
+                                    <div appearance="fill" class="form-field">
                                         <mat-label>{{ component.title }}</mat-label>
-                                        <input [disabled]="readOnly" type="file" matInput [required]="component.required">
-                                    </mat-form-field>
+                                        <input [disabled]="readOnly" multiple type="file" (change)="values[i] = $event.target['files']" [required]="component.required">
+                                    </div>
                                 </div>
 
                                 <!-- Tipo Desconhecido -->
                                 <div *ngSwitchDefault>
                                     <p>Tipo de componente não suportado: {{ component.type }}</p>
                                 </div>
+
+                                <mat-form-field *ngIf="component.insertJustification" appearance="fill" class="form-field w-full">
+                                    <mat-label>Justificativa (Obrigatório)</mat-label>
+                                    <textarea matInput type="text" [disabled]="readOnlyNotes" [value]="justifications[i] || ''" (change)="justifications[i] = $event.target['value']"></textarea>
+                                </mat-form-field>
 
                             </mat-card-content>
                             <mat-card-footer *ngIf="(!readOnly && component.required) || showNotes" class="p-3">

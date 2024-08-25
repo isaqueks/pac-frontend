@@ -59,6 +59,7 @@ export class EditComponent {
             type: FormComponentType.TEXT,
             options: [],
             required: false,
+            insertJustification: false,
             formId: this.form.id,
             form: this.form
         });

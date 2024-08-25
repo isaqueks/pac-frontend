@@ -38,11 +38,20 @@ export class FormService implements IEntityService<IForm> {
         return this.http.delete<void>(`/forms/${id}`);
     }
 
-    execute(formId: string, techId: string, values: { formComponentId, value }[]): Observable<any> {
+    execute(formId: string, techId: string, values: { formComponentId, value, justification? }[]): Observable<any> {
         return this.http.post<void>(`/executions`, {
             formId: formId,
             technicianId: techId,
             executionValues: values
+        });
+    }
+
+    uploadFile(formId: string, file: File): Observable<string> {
+        return this.http.get<any>(`/executions/s3/upload-url`, {
+            params: {
+                formId,
+                ext: file.name.split('.').pop()
+            }
         });
     }
 

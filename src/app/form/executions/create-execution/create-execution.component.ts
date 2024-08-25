@@ -17,6 +17,7 @@ export class CreateExecutionComponent implements OnInit {
     @Input() form: IForm;
     loading = false;
     @Input() values;
+    @Input() justifications = [];
     @Input() notes = [];
     @Input() readOnly: boolean = false;
     @Input() showNotes: boolean = false;
@@ -55,6 +56,8 @@ export class CreateExecutionComponent implements OnInit {
                 value: this.notes?.[i]?.value || ''
             };
 
+            this.justifications[i] = this.justifications?.[i] || '';
+
             return null;
         });
 
@@ -68,15 +71,37 @@ export class CreateExecutionComponent implements OnInit {
     submit() {
         console.log(this.values);
         this.loading = true;
-        this.auth.getLoggedUser().subscribe(defaultErrorHandler(user => {
-            this.formService.execute(this.form.id, user.technician?.id, this.values.map((v, i) => {
+
+        this.auth.getLoggedUser().subscribe(defaultErrorHandler(async user => {
+
+            const values = await Promise.all(this.values.map((v, i) => {
+
+                if (this.form.components[i].required && (!v || v.length === 0)) {
+                    this.loading = false;
+                    Swal.fire('Erro', 'Preencha todos os campos obrigatórios', 'error');
+                    throw new Error('Preencha todos os campos obrigatórios');
+                }
+
+                if (this.form.components[i].insertJustification && !this.justifications[i]) {
+                    this.loading = false;
+                    Swal.fire('Erro', 'Justifique todos os campos obrigatórios', 'error');
+                    throw new Error('Justifique todos os campos obrigatórios');
+                }
+
+                if (v instanceof FileList) {
+                    this.formService.uploadFile(this.form.id, v[0]).subscribe(console.log);
+                }
+
                 v = Array.isArray(v) ? v.join(';') : v;
 
                 return {
                     formComponentId: this.form.components[i].id,
+                    justification: this.justifications[i],
                     value: v
                 }
-            })).subscribe(defaultErrorHandler((exec) => {
+            }));
+
+            this.formService.execute(this.form.id, user.technician?.id, values).subscribe(defaultErrorHandler((exec) => {
                 this.router.navigate(['/form/view-execution', exec.id]);
                 this.loading = false;
             }));

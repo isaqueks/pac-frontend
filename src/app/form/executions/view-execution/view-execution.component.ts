@@ -26,6 +26,7 @@ export class ViewExecutionComponent implements OnInit {
     user: IUser;
     roles = UserRoleEnum;
     notes = [];
+    justifications = [];
 
     constructor(
         private formService: FormService,
@@ -38,6 +39,7 @@ export class ViewExecutionComponent implements OnInit {
         this.loading = true;
         this.formService.getExecutionById(id).subscribe(defaultErrorHandler(formExecution => {
             this.execution = formExecution;
+            this.justifications = formExecution.executionValues.map(ev => ev.justification);
             this.notes = formExecution.executionValues.map(ev => {
                 return {
                     execValueId: ev.id,

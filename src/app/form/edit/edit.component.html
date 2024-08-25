@@ -71,11 +71,20 @@
                         <mat-divider></mat-divider>
                         <mat-card-actions align="end">
                             <mat-slide-toggle 
+                                [checked]="component.insertJustification"
+                                (change)="component.insertJustification = $event.checked;"
+                            >
+                                Exigir Justificativa
+                            </mat-slide-toggle>
+
+                            <mat-slide-toggle 
+                                class="mx-4"
                                 [checked]="component.required"
                                 (change)="component.required = $event.checked;"
                             >
                                 Obrigatório
                             </mat-slide-toggle>
+
                             <button mat-icon-button color="warn" (click)="removeFormComponent(i)">
                                 <mat-icon>delete</mat-icon>
                             </button>
