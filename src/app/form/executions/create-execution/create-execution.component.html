@@ -20,7 +20,9 @@
                                 <div *ngSwitchCase="'number'">
                                     <mat-form-field appearance="fill" class="form-field w-full">
                                         <mat-label>{{ component.title }}</mat-label>
-                                        <input matInput type="number" [disabled]="readOnly" [required]="component.required" [value]="values[i]" (change)="values[i] = $event.target['value']">
+                                        <input matInput type="number" [disabled]="readOnly"
+                                            [required]="component.required" [value]="values[i]"
+                                            (change)="values[i] = $event.target['value']">
                                     </mat-form-field>
                                 </div>
 
@@ -28,7 +30,9 @@
                                 <div *ngSwitchCase="'text'">
                                     <mat-form-field appearance="fill" class="form-field w-full">
                                         <mat-label>{{ component.title }}</mat-label>
-                                        <input matInput type="text" [disabled]="readOnly" [required]="component.required" [value]="values[i]" (change)="values[i] = $event.target['value']">
+                                        <input matInput type="text" [disabled]="readOnly"
+                                            [required]="component.required" [value]="values[i]"
+                                            (change)="values[i] = $event.target['value']">
                                     </mat-form-field>
                                 </div>
 
@@ -36,7 +40,8 @@
                                 <div *ngSwitchCase="'checkbox_list'">
                                     <!-- <mat-label>{{ component.title }}</mat-label> -->
                                     <mat-checkbox *ngFor="let option of component.options; let j = index"
-                                        [required]="component.required" [disabled]="readOnly" [checked]="values[i][j]" (change)="values[i][j] = $event.checked">
+                                        [required]="component.required" [disabled]="readOnly" [checked]="values[i][j]"
+                                        (change)="values[i][j] = $event.checked">
                                         {{ option }}
                                     </mat-checkbox>
                                 </div>
@@ -44,9 +49,9 @@
                                 <!-- Lista de Rádio -->
                                 <div *ngSwitchCase="'radio_list'">
                                     <!-- <mat-label>{{ component.title }}</mat-label> -->
-                                    <mat-radio-group [disabled]="readOnly" [required]="component.required" [value]="values[i]" (change)="values[i] = $event.value">
-                                        <mat-radio-button *ngFor="let option of component.options"
-                                            [value]="option">
+                                    <mat-radio-group [disabled]="readOnly" [required]="component.required"
+                                        [value]="values[i]" (change)="values[i] = $event.value">
+                                        <mat-radio-button *ngFor="let option of component.options" [value]="option">
                                             {{ option }}
                                         </mat-radio-button>
                                     </mat-radio-group>
@@ -56,10 +61,10 @@
                                 <div *ngSwitchCase="'date'">
                                     <mat-form-field appearance="fill" class="form-field">
                                         <mat-label>{{ component.title }}</mat-label>
-                                        <input [disabled]="readOnly" [value]="values[i]" matInput [matDatepicker]="picker"
-                                            [required]="component.required" (dateChange)="values[i] = $event.value">
-                                        <mat-datepicker-toggle matSuffix
-                                            [for]="picker"></mat-datepicker-toggle>
+                                        <input [disabled]="readOnly" [value]="values[i]" matInput
+                                            [matDatepicker]="picker" [required]="component.required"
+                                            (dateChange)="values[i] = $event.value">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
                                 </div>
@@ -67,8 +72,20 @@
                                 <!-- Campo de Upload -->
                                 <div *ngSwitchCase="'upload'">
                                     <div appearance="fill" class="form-field">
-                                        <mat-label>{{ component.title }}</mat-label>
-                                        <input [disabled]="readOnly" multiple type="file" (change)="values[i] = $event.target['files']" [required]="component.required">
+                                        <input *ngIf="!readOnly" [disabled]="readOnly" multiple type="file"
+                                            (change)="values[i] = $event.target['files']"
+                                            [required]="component.required">
+                                        <div *ngIf="readOnly">
+                                            <mat-list>
+                                                <mat-list-item *ngFor="let file of values[i]">
+                                                    <button mat-raised-button color="primary"
+                                                        (click)="download(file.url)">
+                                                        <mat-icon>download</mat-icon>
+                                                        {{ file.name }}
+                                                    </button>
+                                                </mat-list-item>
+                                            </mat-list>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -77,19 +94,27 @@
                                     <p>Tipo de componente não suportado: {{ component.type }}</p>
                                 </div>
 
-                                <mat-form-field *ngIf="component.insertJustification" appearance="fill" class="form-field w-full">
+                                <mat-form-field *ngIf="component.insertJustification" appearance="fill"
+                                    class="form-field w-full">
                                     <mat-label>Justificativa (Obrigatório)</mat-label>
-                                    <textarea matInput type="text" [disabled]="readOnly" [value]="justifications[i] || ''" (change)="justifications[i] = $event.target['value']"></textarea>
+                                    <textarea matInput type="text" [disabled]="readOnly"
+                                        [value]="justifications[i] || ''"
+                                        (change)="justifications[i] = $event.target['value']"></textarea>
                                 </mat-form-field>
 
                             </mat-card-content>
                             <mat-card-footer *ngIf="(!readOnly && component.required) || showNotes" class="p-3">
-                                <mat-card-subtitle *ngIf="!readOnly && component.required">Obrigatório</mat-card-subtitle>
-                                <mat-card-subtitle *ngIf="showNotes && notes[i].techManager">{{notes[i].techManager?.name}} deixou uma observação:</mat-card-subtitle>
+                                <mat-card-subtitle
+                                    *ngIf="!readOnly && component.required">Obrigatório</mat-card-subtitle>
+                                <mat-card-subtitle
+                                    *ngIf="showNotes && notes[i].techManager">{{notes[i].techManager?.name}} deixou uma
+                                    observação:</mat-card-subtitle>
 
                                 <mat-form-field *ngIf="showNotes" appearance="fill" class="form-field w-full">
                                     <mat-label>Observações</mat-label>
-                                    <textarea matInput type="text" [disabled]="readOnlyNotes" [value]="notes[i]?.value || ''" (change)="notes[i].value = $event.target['value']"></textarea>
+                                    <textarea matInput type="text" [disabled]="readOnlyNotes"
+                                        [value]="notes[i]?.value || ''"
+                                        (change)="notes[i].value = $event.target['value']"></textarea>
                                 </mat-form-field>
                             </mat-card-footer>
                         </mat-card>
@@ -102,7 +127,8 @@
                     <button *ngIf="!readOnly" mat-raised-button color="primary" (click)="submit()">
                         Enviar Respostas
                     </button>
-                    <button [disabled]="!notesChanged()" *ngIf="showNotes && !readOnlyNotes" mat-raised-button color="primary" (click)="submitNotes()">
+                    <button [disabled]="!notesChanged()" *ngIf="showNotes && !readOnlyNotes" mat-raised-button
+                        color="primary" (click)="submitNotes()">
                         Salvar Observações
                     </button>
                 </div>

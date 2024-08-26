@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import IEntityService from './entity-base.service';
 import { IForm } from './entities/form.entity';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IFormExecution } from './entities/execution.entity';
 
@@ -46,13 +46,29 @@ export class FormService implements IEntityService<IForm> {
         });
     }
 
-    uploadFile(formId: string, file: File): Observable<string> {
+    uploadFile(formId: string, file: File) {
         return this.http.get<any>(`/executions/s3/upload-url`, {
             params: {
                 formId,
                 ext: file.name.split('.').pop()
             }
-        });
+        }).pipe(switchMap(res => {
+            const { url, location } = res;
+            // upload to s3 presigned url
+            
+            return new Observable(subscriber => {
+                fetch(url, {
+                    method: 'PUT',
+                    body: file,
+                    headers: {
+                        'Content-Type': file.type
+                    }
+                })
+                .then(res => subscriber.next(location))
+                .catch(err => subscriber.error(err))
+                .finally(() => subscriber.complete());
+            });
+        }))
     }
 
     getExecutions(formId: string): Observable<IFormExecution[]> {

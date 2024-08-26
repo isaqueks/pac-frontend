@@ -51,6 +51,14 @@ export class CreateExecutionComponent implements OnInit {
             else if (cp.type === FormComponentType.RADIO_LIST) {
                 return this.values?.[i] || null;
             }
+            else if (cp.type === FormComponentType.UPLOAD) {
+                return (this.values?.[i] || '').split(';').filter(x => x).map(f => {
+                    return {
+                        name: f.split('/').pop(),
+                        url: f
+                    }
+                })
+            }
 
             this.notes[i] = {
                 execValueId: this.notes?.[i]?.execValueId,
@@ -76,7 +84,7 @@ export class CreateExecutionComponent implements OnInit {
 
         this.auth.getLoggedUser().subscribe(defaultErrorHandler(async user => {
 
-            const values = await Promise.all(this.values.map((v, i) => {
+            const values = await Promise.all(this.values.map(async (v, i) => {
 
                 if (this.form.components[i].required && (!v || v.length === 0)) {
                     this.loading = false;
@@ -91,7 +99,9 @@ export class CreateExecutionComponent implements OnInit {
                 }
 
                 if (v instanceof FileList) {
-                    this.formService.uploadFile(this.form.id, v[0]).subscribe(console.log);
+                    v = await Promise.all(Array.from(v).map(file => {
+                        return this.formService.uploadFile(this.form.id, file).toPromise()
+                    }))
                 }
 
                 v = Array.isArray(v) ? v.join(';') : v;
@@ -127,6 +137,17 @@ export class CreateExecutionComponent implements OnInit {
             }));
         });
 
+    }
+
+
+    download(url) {
+        // download with fetch
+                fetch(url).then(res => res.blob()).then(blob => {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = url.split('/').pop();
+            a.click();
+        });
     }
 
 }

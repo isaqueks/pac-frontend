@@ -21,7 +21,7 @@ export class HttpHandlerInterceptor implements HttpInterceptor {
      // cloned headers, updated with the authorization.
      const authReq = request.clone({
        headers: authToken ? request.headers.set('Authorization', 'Bearer '+authToken) : request.headers,
-       url: `${environment.API_BASE_URL}${request.url}`
+       url: request.url.startsWith('http') ? request.url : `${environment.API_BASE_URL}${request.url}`
      });
  
      // send cloned request with header to the next handler.
