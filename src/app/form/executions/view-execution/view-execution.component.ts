@@ -41,13 +41,16 @@ export class ViewExecutionComponent implements OnInit {
             this.execution = formExecution;
             this.justifications = formExecution.executionValues.map(ev => ev.justification);
             this.notes = formExecution.executionValues.map(ev => {
+                console.log(ev)
                 return {
                     execValueId: ev.id,
                     techManager: ev.technicalManager,
                     value: ev.note,
-                    accordingly: ev.accordingly
+                    accordingly: ev.accordingly,
+                    componentId: ev.formComponentId,
                 };
             });
+            console.log(this.notes)
             this.formService.getById(formExecution?.formId).subscribe(defaultErrorHandler(form => {
                 this.form = form;
                 this.values = this.form.components.map(cp => {

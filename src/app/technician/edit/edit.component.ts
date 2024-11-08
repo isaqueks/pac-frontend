@@ -49,7 +49,8 @@ export class EditComponent {
             ...technician,
             email: technician.user?.email,
         });
-        this.technicianForm.get('password')?.disable();
+        this.technicianForm.get('password').clearValidators();
+        this.technicianForm.get('password').updateValueAndValidity();
         this.selectedCostCenter = technician.costCenter;
       }));
     }
@@ -66,6 +67,7 @@ export class EditComponent {
 
     if (this.isEditMode) {
       technician.id = this.technicianId!;
+      technician['password'] = technician['password'] || undefined;
       this.technicianService.update(technician).subscribe(defaultErrorHandler(() => {
         this.snackBar.open('Técnico atualizado com sucesso', 'Fechar', {
           duration: 3000

@@ -48,7 +48,8 @@ export class EditComponent {
                 ...client,
                 email: client.user?.email
             });
-            this.clientForm.get('password')?.disable();
+            this.clientForm.get('password').clearValidators();
+            this.clientForm.get('password').updateValueAndValidity();
           }));
         }
       });
@@ -58,6 +59,7 @@ export class EditComponent {
       if (this.clientForm.valid) {
         const client: IClient = this.clientForm.value;
         if (this.isEditMode) {
+          client['password'] = client['password'] || undefined;
           client.id = this.clientId!;
           this.clientService.update(client).subscribe(defaultErrorHandler(() => {
             this.router.navigate(['/client']);

@@ -35,13 +35,20 @@ export class CreateExecutionComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        console.log(this.notes)
+
+        const notes = [];
+
         this.values = this.form.components.map((cp, i) => {
 
-            this.notes[i] = {
-                execValueId: this.notes?.[i]?.execValueId,
-                value: this.notes?.[i]?.value || '',
-                techManager: this.notes?.[i]?.techManager,
-                accordingly: this.notes?.[i]?.accordingly
+            const index = this.notes.findIndex(n => n.componentId === cp.id);
+
+            notes[i] = {
+                execValueId: this.notes?.[index]?.execValueId,
+                value: this.notes?.[index]?.value || '',
+                techManager: this.notes?.[index]?.techManager,
+                accordingly: this.notes?.[index]?.accordingly,
+                componentId: this.notes?.[index]?.componentId,
             };
 
             this.justifications[i] = this.justifications?.[i] || '';
@@ -72,6 +79,8 @@ export class CreateExecutionComponent implements OnInit {
 
             return null;
         });
+
+        this.notes = notes;
 
         this.initialNotes = structuredClone(this.notes);
     }

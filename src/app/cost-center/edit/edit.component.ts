@@ -54,7 +54,8 @@ export class EditComponent {
             email: costCenter.user?.email
         });
         this.selectedClient = costCenter.client;
-        this.costCenterForm.get('password').disable();
+        this.costCenterForm.get('password').clearValidators();
+        this.costCenterForm.get('password').updateValueAndValidity();
       });
     }
     else {
@@ -73,6 +74,7 @@ export class EditComponent {
     costCenter.id = this.editId;
 
     if (this.isEditMode) {
+      costCenter['password'] = costCenter['password'] || undefined;
       this.costCenterService.update(costCenter).subscribe(() => {
         this.snackBar.open('Centro de Custo atualizado com sucesso', 'Fechar', {
           duration: 3000

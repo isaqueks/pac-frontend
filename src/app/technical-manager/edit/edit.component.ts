@@ -44,7 +44,8 @@ export class EditComponent {
             ...manager,
             email: manager.user?.email,
           });
-          this.managerForm.get('password')?.disable();
+          this.managerForm.get('password').clearValidators();
+          this.managerForm.get('password').updateValueAndValidity();
           this.selectedCostCenter = manager.costCenter;
         }));
       }
@@ -61,6 +62,7 @@ export class EditComponent {
   
       if (this.isEditMode) {
         manager.id = this.managerId!;
+        manager['password'] = manager['password'] || undefined;
         this.technicalManagerService.update(manager).subscribe(defaultErrorHandler(() => {
           this.snackBar.open('Gerente Técnico atualizado com sucesso', 'Fechar', {
             duration: 3000

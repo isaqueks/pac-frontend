@@ -31,8 +31,8 @@
             </mat-form-field>
   
             <mat-form-field class="form-field" appearance="fill">
-              <mat-label>Senha</mat-label>
-              <input type="password" matInput formControlName="password" required>
+              <mat-label>Senha <span *ngIf="isEditMode">(Digite para atualizar)</span></mat-label>
+              <input autocomplete="one-time-code" type="password" matInput formControlName="password" required>
             </mat-form-field>
           </div>
   
