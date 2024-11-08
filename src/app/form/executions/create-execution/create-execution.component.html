@@ -110,6 +110,11 @@
                                     *ngIf="showNotes && notes[i].techManager">{{notes[i].techManager?.name}} deixou uma
                                     observação:</mat-card-subtitle>
 
+                                <mat-checkbox *ngIf="showNotes"
+                                    [disabled]="readOnlyNotes" [checked]="notes[i]?.accordingly"
+                                    (change)="notes[i].accordingly = $event.checked">
+                                    Dentro dos conformes
+                                </mat-checkbox>
                                 <mat-form-field *ngIf="showNotes" appearance="fill" class="form-field w-full">
                                     <mat-label>Observações</mat-label>
                                     <textarea matInput type="text" [disabled]="readOnlyNotes"

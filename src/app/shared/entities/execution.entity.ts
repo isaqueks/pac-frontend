@@ -9,6 +9,7 @@ export interface IFormExecution extends IBaseEntity {
     technician?: ITechnician;
     formId: string;
     executionValues: Array<{
+        accordingly: boolean;
         formComponentId: string; 
         justification?: string;
         technicalManager?: ITechnicalManager;

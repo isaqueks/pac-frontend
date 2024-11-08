@@ -36,6 +36,16 @@ export class CreateExecutionComponent implements OnInit {
 
     ngOnInit(): void {
         this.values = this.form.components.map((cp, i) => {
+
+            this.notes[i] = {
+                execValueId: this.notes?.[i]?.execValueId,
+                value: this.notes?.[i]?.value || '',
+                techManager: this.notes?.[i]?.techManager,
+                accordingly: this.notes?.[i]?.accordingly
+            };
+
+            this.justifications[i] = this.justifications?.[i] || '';
+
             if (cp.type === FormComponentType.TEXT) {
                 return this.values?.[i] || '';
             }
@@ -60,14 +70,6 @@ export class CreateExecutionComponent implements OnInit {
                 })
             }
 
-            this.notes[i] = {
-                execValueId: this.notes?.[i]?.execValueId,
-                value: this.notes?.[i]?.value || '',
-                techManager: this.notes?.[i]?.techManager
-            };
-
-            this.justifications[i] = this.justifications?.[i] || '';
-
             return null;
         });
 
@@ -75,7 +77,7 @@ export class CreateExecutionComponent implements OnInit {
     }
 
     notesChanged() {
-        return !this.notes.every((note, i) => note.value === this.initialNotes[i].value);
+        return !this.notes.every((note, i) => note.value === this.initialNotes[i].value && note.accordingly == this.initialNotes[i].accordingly);
     }
 
     submit() {
@@ -122,13 +124,13 @@ export class CreateExecutionComponent implements OnInit {
 
     submitNotes() {
         this.loading = true;
-        let pending = this.notes.filter(n => n.value.trim()).length;
+        let pending = this.notes.filter(n => (n.value||'').trim()).length;
 
         this.notes.forEach(note => {
-            if (!note.value.trim()) {
+            if (!(note.value||'').trim()) {
                 return;
             }
-            this.formService.setNote(this.execId, note.execValueId, note.value.trim()).subscribe(defaultErrorHandler(() => {
+            this.formService.setNote(this.execId, note.execValueId, (note.value||'').trim(), note.accordingly).subscribe(defaultErrorHandler(() => {
                 pending--;
                 if (pending === 0) {
                     this.loading = false;

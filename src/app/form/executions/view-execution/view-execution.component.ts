@@ -44,7 +44,8 @@ export class ViewExecutionComponent implements OnInit {
                 return {
                     execValueId: ev.id,
                     techManager: ev.technicalManager,
-                    value: ev.note
+                    value: ev.note,
+                    accordingly: ev.accordingly
                 };
             });
             this.formService.getById(formExecution?.formId).subscribe(defaultErrorHandler(form => {

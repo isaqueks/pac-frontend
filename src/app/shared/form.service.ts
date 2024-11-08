@@ -83,7 +83,7 @@ export class FormService implements IEntityService<IForm> {
         return this.http.delete<void>(`/executions/${execId}`);
     }
 
-    setNote(execId: string, execValId: string, note: string): Observable<any> {
-        return this.http.patch<void>(`/executions/${execId}/values/${execValId}/notes`, { note });
+    setNote(execId: string, execValId: string, note: string, accordingly: boolean): Observable<any> {
+        return this.http.patch<void>(`/executions/${execId}/values/${execValId}/notes`, { note, accordingly: String(!!accordingly) });
     }
 }
